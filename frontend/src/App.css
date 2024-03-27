@@ -58,3 +58,15 @@
   border-radius: 50%;
   margin-bottom: 20px;
 }
+
+.buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 100px;
+}
+
+.buttons > * {
+  font-size: 2em;
+  min-height: 100px;
+  min-width: 300px;
+}
