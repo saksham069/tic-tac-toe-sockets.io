@@ -1,0 +1,60 @@
+.tic-tac-toe-board {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+}
+
+.cell {
+  width: 100px;
+  height: 100px;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+}
+
+.top,
+.middle {
+  border-bottom: 2px solid aliceblue;
+}
+
+.bottom,
+.middle {
+  border-top: 2px solid aliceblue;
+}
+
+.left,
+.center {
+  border-right: 2px solid aliceblue;
+}
+
+.right,
+.center {
+  border-left: 2px, solid aliceblue;
+}
+
+.cross {
+  height: 50%;
+  width: 50%;
+}
+.cross > * {
+  background-color: aliceblue;
+  width: 100%;
+  height: 2px;
+}
+
+.cross > :first-child {
+  transform: rotate(-45deg);
+}
+.cross > :last-child {
+  transform: rotate(45deg);
+}
+
+.circle {
+  width: 50%;
+  height: 50%;
+  background-color: #242424;
+  border: 2px solid aliceblue;
+  border-radius: 50%;
+  margin-bottom: 20px;
+}
