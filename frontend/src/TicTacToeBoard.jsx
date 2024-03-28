@@ -1,26 +1,53 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Cross from "./Cross";
 import Circle from "./Circle";
+import GameOver from "./GameOver";
 
 function TicTacToeBoard() {
   const [grid, setGrid] = useState(new Array(9).fill(null));
   const [player1Turn, setPlayer1Turn] = useState(false);
-  const CheckGameOver = () => {
-    if (grid[0]?.type == grid[1]?.type) console.log("yes"); // gotta work this out, make sockets work and take away contiguous turns on the board for online players
+  const [gameOver, setGameOver] = useState(false);
+
+  const checkGameOver = () => {
+    const winningCombinations = [
+      [0, 1, 2],
+      [3, 4, 5],
+      [6, 7, 8],
+      [0, 3, 6],
+      [1, 4, 7],
+      [2, 5, 8],
+      [0, 4, 8],
+      [2, 4, 6],
+    ];
+
+    for (const combination of winningCombinations) {
+      const [a, b, c] = combination;
+      if (
+        grid[a] &&
+        grid[a].type === grid[b]?.type &&
+        grid[a].type === grid[c]?.type
+      )
+        setGameOver(true);
+    }
   };
+
+  useEffect(checkGameOver, [grid]);
+
   const handleClick = (e) => {
     if (!e.target.classList.contains("filled")) {
       const ind = e.target.classList[e.target.classList.length - 1];
       setGrid((prev) => {
-        prev[ind] = player1Turn ? <Cross /> : <Circle />;
-        return prev;
+        const newGrid = [...prev];
+        newGrid[ind] = player1Turn ? <Cross /> : <Circle />;
+        return newGrid;
       });
       e.target.classList.add("filled");
-      CheckGameOver();
       setPlayer1Turn(!player1Turn);
     }
   };
-  return (
+  return gameOver ? (
+    <GameOver winner={player1Turn ? "Player 1" : "Player 2"} />
+  ) : (
     <div className="tic-tac-toe-board">
       <div onClick={handleClick} className="cell top left 0">
         {grid[0]}

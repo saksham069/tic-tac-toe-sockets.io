@@ -9,6 +9,14 @@ function OnlineGame() {
     socket.on("connect", () => {
       console.log("connected");
     });
+
+    socket.on("player1", (msg) => {
+      console.log(msg);
+    });
+
+    socket.on("player2", (msg) => {
+      console.log(msg);
+    });
   }, []);
   return <TicTacToeBoard />;
 }

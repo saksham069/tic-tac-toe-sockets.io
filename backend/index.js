@@ -32,12 +32,12 @@ io.on("connection", (socket) => {
   if (players.player1) {
     if (!players.player2) {
       players.player2 = socket.id;
-      // tell client its player 2
+      socket.emit("player2", "you are player2");
     }
     // else emit server full
   } else {
     players.player1 = socket.id;
-    // tell client its player 1
+    socket.emit("player1", "you are player1");
   }
 
   socket.on("disconnect", () => {
